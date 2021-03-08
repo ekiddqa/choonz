@@ -21,13 +21,13 @@ public class Artist {
     private long id;
 
     @NotNull
-    @Size(max = 100)
+    @Size(max = 40)
     @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<Album> albums;
-
+    
     public Artist() {
         super();
         // TODO Auto-generated constructor stub

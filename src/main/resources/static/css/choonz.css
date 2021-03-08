@@ -1,0 +1,23 @@
+.logo {
+    height: 78px;
+    width: 206px;
+    object-fit: cover;
+}
+
+#searchbar-search {
+    font-size: xx-large;
+    font-family: Consolas;
+    color: white;
+}
+
+#select-bar {
+    width: 10%;
+}
+
+#input-bar {
+    max-width:43.5%
+}
+
+.font-mono {
+    font-family: Consolas;
+}

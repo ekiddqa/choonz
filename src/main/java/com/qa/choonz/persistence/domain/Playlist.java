@@ -28,7 +28,7 @@ public class Playlist {
     @NotNull
     @Size(max = 500)
     @Column(unique = true)
-    private String description;
+    private String desc;
 
     @NotNull
     @Size(max = 1000)
@@ -48,7 +48,7 @@ public class Playlist {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.desc = description;
         this.artwork = artwork;
         this.tracks = tracks;
     }
@@ -70,11 +70,11 @@ public class Playlist {
     }
 
     public String getDescription() {
-        return description;
+        return desc;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.desc = description;
     }
 
     public String getArtwork() {
@@ -97,14 +97,14 @@ public class Playlist {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Playlist [id=").append(id).append(", name=").append(name).append(", description=")
-                .append(description).append(", artwork=").append(artwork).append(", tracks=").append(tracks)
+                .append(desc).append(", artwork=").append(artwork).append(", tracks=").append(tracks)
                 .append("]");
         return builder.toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(artwork, description, id, name, tracks);
+        return Objects.hash(artwork, desc, id, name, tracks);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Playlist {
             return false;
         }
         Playlist other = (Playlist) obj;
-        return Objects.equals(artwork, other.artwork) && Objects.equals(description, other.description)
+        return Objects.equals(artwork, other.artwork) && Objects.equals(desc, other.desc)
                 && id == other.id && Objects.equals(name, other.name) && Objects.equals(tracks, other.tracks);
     }
 

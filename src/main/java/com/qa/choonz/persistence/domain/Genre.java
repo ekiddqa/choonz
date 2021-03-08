@@ -26,38 +26,38 @@ public class Genre {
     private String name;
 
     @NotNull
-    @Size(max = 250)
+    @Size(max = 450)
     @Column(unique = true)
-    private String description;
+    private String desc;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
-    private List<Album> albums;
+    private List<Track> tracks;
 
     public Genre() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public Genre(long id, @NotNull @Size(max = 100) String name, @NotNull @Size(max = 250) String description,
-            List<Album> albums) {
+    public Genre(long id, @NotNull @Size(max = 100) String name, @NotNull @Size(max = 450) String desc,
+            List<Track> tracks) {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.albums = albums;
+        this.desc = desc;
+        this.tracks = tracks;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Genre [id=").append(id).append(", name=").append(name).append(", description=")
-                .append(description).append(", albums=").append(albums).append("]");
+                .append(desc).append(", albums=").append(tracks).append("]");
         return builder.toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(albums, description, id, name);
+        return Objects.hash(tracks, desc, id, name);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Genre {
             return false;
         }
         Genre other = (Genre) obj;
-        return Objects.equals(albums, other.albums) && Objects.equals(description, other.description) && id == other.id
+        return Objects.equals(tracks, other.tracks) && Objects.equals(desc, other.desc) && id == other.id
                 && Objects.equals(name, other.name);
     }
 

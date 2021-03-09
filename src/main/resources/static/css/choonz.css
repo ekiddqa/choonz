@@ -10,26 +10,26 @@
     color: white;
 }
 
-/*#select-bar {*/
-/*    width: 10%;*/
-/*}*/
-
-/*#input-bar {*/
-/*    max-width:43.5%*/
-/*}*/
-
 .regular-text {
     font-family: Consolas;
     color: white;
 }
-
-/*.container-max-with {*/
-/*    max-width: 100%;*/
-/*}*/
 
 .centre-header {
     font-size: xx-large;
     font-family: Consolas;
     color: white;
     text-align: center;
+}
+
+.centre-content {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.text-one-line {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
 }

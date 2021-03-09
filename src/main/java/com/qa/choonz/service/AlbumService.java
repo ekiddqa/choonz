@@ -46,7 +46,7 @@ public class AlbumService {
         toUpdate.setName(toUpdate.getName());
         toUpdate.setTracks(toUpdate.getTracks());
         toUpdate.setArtist(toUpdate.getArtist());
-        toUpdate.setCover(toUpdate.getCover());
+        toUpdate.setCoverImg(toUpdate.getCoverImg());
         Album updated = this.repo.save(toUpdate);
         return this.mapToDTO(updated);
     }

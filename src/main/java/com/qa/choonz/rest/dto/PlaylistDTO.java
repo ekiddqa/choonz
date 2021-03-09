@@ -9,7 +9,7 @@ public class PlaylistDTO {
 
     private long id;
     private String name;
-    private String description;
+    private String desc;
     private String artwork;
     private List<Track> tracks;
 
@@ -18,11 +18,11 @@ public class PlaylistDTO {
         // TODO Auto-generated constructor stub
     }
 
-    public PlaylistDTO(long id, String name, String description, String artwork, List<Track> tracks) {
+    public PlaylistDTO(long id, String name, String desc, String artwork, List<Track> tracks) {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.desc = desc;
         this.artwork = artwork;
         this.tracks = tracks;
     }
@@ -58,15 +58,15 @@ public class PlaylistDTO {
     /**
      * @return the description
      */
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
     /**
-     * @param description the description to set
+     * @param desc the description to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     /**
@@ -101,14 +101,14 @@ public class PlaylistDTO {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PlaylistDTO [id=").append(id).append(", name=").append(name).append(", description=")
-                .append(description).append(", artwork=").append(artwork).append(", tracks=").append(tracks)
+                .append(desc).append(", artwork=").append(artwork).append(", tracks=").append(tracks)
                 .append("]");
         return builder.toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(artwork, description, id, name, tracks);
+        return Objects.hash(artwork, desc, id, name, tracks);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class PlaylistDTO {
             return false;
         }
         PlaylistDTO other = (PlaylistDTO) obj;
-        return Objects.equals(artwork, other.artwork) && Objects.equals(description, other.description)
+        return Objects.equals(artwork, other.artwork) && Objects.equals(desc, other.desc)
                 && id == other.id && Objects.equals(name, other.name) && Objects.equals(tracks, other.tracks);
     }
 

@@ -24,6 +24,7 @@ public class Track {
     private String name;
 
     @ManyToOne
+    @NotNull
     private Album album;
 
     @ManyToOne
@@ -42,7 +43,7 @@ public class Track {
         // TODO Auto-generated constructor stub
     }
 
-    public Track(long id, @NotNull @Size(max = 100) String name, Album album, Playlist playlist, int duration, Genre genre,
+    public Track(long id, @NotNull @Size(max = 100) String name, @NotNull Album album, Playlist playlist, int duration, Genre genre,
             String lyrics) {
         super();
         this.id = id;

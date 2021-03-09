@@ -3,26 +3,26 @@ package com.qa.choonz.rest.dto;
 import java.util.List;
 import java.util.Objects;
 
-import com.qa.choonz.persistence.domain.Album;
+import com.qa.choonz.persistence.domain.Track;
 
 public class GenreDTO {
 
     private long id;
     private String name;
-    private String description;
-    private List<Album> albums;
+    private String desc;
+    private List<Track> tracks;
 
     public GenreDTO() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public GenreDTO(long id, String name, String description, List<Album> albums) {
+    public GenreDTO(long id, String name, String desc, List<Track> tracks) {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.albums = albums;
+        this.desc = desc;
+        this.tracks = tracks;
     }
 
     public long getId() {
@@ -41,33 +41,33 @@ public class GenreDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("GenreDTO [id=").append(id).append(", name=").append(name).append(", description=")
-                .append(description).append(", albums=").append(albums).append("]");
+                .append(desc).append(", tracks=").append(tracks).append("]");
         return builder.toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(albums, description, id, name);
+        return Objects.hash(tracks, desc, id, name);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class GenreDTO {
             return false;
         }
         GenreDTO other = (GenreDTO) obj;
-        return Objects.equals(albums, other.albums) && Objects.equals(description, other.description) && id == other.id
+        return Objects.equals(tracks, other.tracks) && Objects.equals(desc, other.desc) && id == other.id
                 && Objects.equals(name, other.name);
     }
 

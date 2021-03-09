@@ -18,6 +18,11 @@
     max-width:43.5%
 }
 
-.font-mono {
+.regular-text {
     font-family: Consolas;
+    color: white;
+}
+
+.container-max-with {
+    max-width: 100%;
 }

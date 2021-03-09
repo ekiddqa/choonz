@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="css/choonz.css">
     <title>Choonz Music Service</title>
 </head>
-<body>
-
+<body class="bg-dark">
 <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand me-3 pe-3" href="index.html">
         <img class="logo" src="../img/ChoonzInverted.png" alt="Choonz Logo">
@@ -26,7 +25,8 @@
     <input type="search" id="input-bar" class="form-control mb-3 mx-1">
     <button type="submit" id="search-button" class="btn btn-secondary mb-3 mx-1">Search</button>
     <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white bg-secondary rounded mb-3 mx-1" href="#" id="account-settings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle text-white bg-secondary rounded mb-3 mx-1" href="#" id="account-settings"
+           role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Account Settings
         </a>
         <ul class="dropdown-menu" aria-labelledby="account-settings">
@@ -35,6 +35,30 @@
         </ul>
     </div>
 </nav>
+<div class="container mx-0 container-max-with">
+    <div class="row">
+        <div class="col-2" id="left-col">
+            <p class="regular-text">My Playlists</p>
+            <p class="regular-text">Not Logged In</p>
+            <p class="regular-text">PLACEHOLDER NEED TO CHECK IF ACTUALLY LOGGED IN
+            COULD USE LOCAL-STORAGE</p>
+        </div>
+        <div class="col-8" id="centre-col">
+            <p class="regular-text">The Main Stuff</p>
+            <p class="regular-text">NEED TO CHECK IF LOGGED IN AND DISPLAY ACCORDINGLY</p>
+            <span><p class="regular-text" style="float: left">Trending Artists</p></span>
+            <span><p class="regular-text" style="float: right">Gathered From LastFM</p></span>
+            <br>
+            <div id="trending-artists">
+            </div>
+        </div>
+        <div class="col-2" id="right-col">
+            <p class="regular-text">Recent History</p>
+            <p class="regular-text">TO IMPLEMENT</p>
+        </div>
+    </div>
+</div>
 <script src="js/bootstrap.bundle.js"></script>
+<script src="js/no-login-fetch-LastFM.js"></script>
 </body>
 </html>

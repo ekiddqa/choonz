@@ -15,10 +15,6 @@
 	<name>Choonz</name>
 	<description>Choonz - The Music Database</description>
 
-	<properties>
-		<java.version>14</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

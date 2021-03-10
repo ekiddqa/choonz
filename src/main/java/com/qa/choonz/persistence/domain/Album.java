@@ -32,15 +32,17 @@ public class Album {
     @JoinColumn(name = "artist_id", nullable = false)
     private Artist artist = new Artist();
 
-    private String genreName;
-    
+    @ManyToOne
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre = new Genre();
+
     private String coverImg;
 
     public Album(Long id, String name, Artist artist, Genre genre, String coverImg) {
         this.id = id;
         this.name = name;
         this.artist = artist;
-        this.genreName = genre.getName();
+        this.genre = genre;
         this.coverImg = coverImg;
     }
 }

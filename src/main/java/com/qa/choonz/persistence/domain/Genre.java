@@ -31,7 +31,7 @@ public class Genre {
 
     @OneToMany(mappedBy = "genre", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Track> tracks;
+    private List<Album> albums;
 
     public Genre(Long id, String name, String desc) {
         this.id = id;

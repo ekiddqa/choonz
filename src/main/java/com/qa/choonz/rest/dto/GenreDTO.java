@@ -14,6 +14,6 @@ public class GenreDTO {
     private long id;
     private String name;
     private String desc;
-    private List<TrackDTO> tracks;
+    private List<AlbumDTO> albums;
 
 }

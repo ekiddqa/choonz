@@ -1,0 +1,35 @@
+.logo-resize {
+    height: 90%;
+    width: 90%;
+    object-fit: cover;
+}
+
+#searchbar-search {
+    font-size: xx-large;
+    font-family: Consolas;
+    color: white;
+}
+
+.regular-text {
+    font-family: Consolas;
+    color: white;
+}
+
+.centre-header {
+    font-size: xx-large;
+    font-family: Consolas;
+    color: white;
+    text-align: center;
+}
+
+.centre-content {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.text-one-line {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}

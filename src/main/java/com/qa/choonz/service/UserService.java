@@ -27,9 +27,8 @@ public class UserService {
 	}
 	
 	//CREATE USER
-	
-	public void createUser(User user) {
-		repo.save(user);
+	public UserDTO createUser(User user) {
+		return this.mapToDTO(this.repo.save(user));	
 	}
 
 }

@@ -12,12 +12,7 @@ public class UserDTO {
     @NotNull
     @NotEmpty
     private String password;
-    
-	public UserDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
+
 	public String getUsername() {
 		return username;
 	}

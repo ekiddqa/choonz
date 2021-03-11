@@ -1,3 +1,5 @@
+import {passwordToHash} from './utils.js';
+
 let login = () => {
     let username = document.querySelector('#username-input');
     let password = document.querySelector('#password-input');
@@ -11,7 +13,6 @@ let login = () => {
             return bodyObj
         })
         .then((body) => {
-            console.log(JSON.stringify(body));
             fetch('http://localhost:8082/users/login', {
                 method: 'POST',
                 headers: {
@@ -23,26 +24,21 @@ let login = () => {
                     console.error("Unable to login (wrong credentials)");
                     updateFail("wrong-credentials");
                 } else if (response.status === 200) {
-                    window.location.replace('../index.html');
+                    let auth = response.text();
+                    return auth;
                 } else {
                     console.error(`Failed with error ${response.status} code`);
                     updateFail(response.status)
                 }
+            }).then((auth)=>{
+                sessionStorage.setItem('auth', JSON.stringify(auth));
+                window.location.replace('../index.html');
             })
         })
         .finally(() => {
             username.value = '';
             password.value = '';
         })
-}
-
-
-let passwordToHash = async (password) => {
-    const msgUint8 = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
 }
 
 let createFail = () => {

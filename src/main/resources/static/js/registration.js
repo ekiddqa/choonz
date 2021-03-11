@@ -1,3 +1,5 @@
+import {passwordToHash} from './utils.js';
+
 let register =()=>{
     let username = document.querySelector('#username-input');
     let password = document.querySelector('#password-input');
@@ -29,7 +31,7 @@ let register =()=>{
                         console.error("Failed to create user, already exists");
                         updateFail("exists");
                     } else if (response.status === 201) {
-                        window.location.replace('../index.html');
+                        window.location.replace('login.html');
                     } else {
                         console.error(`Failed with error ${response.status} code`);
                         updateFail(response.status)
@@ -42,14 +44,6 @@ let register =()=>{
                 passwordRe.value = '';
             })
     }
-}
-
-let passwordToHash = async (password)=>{
-    const msgUint8 = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
 }
 
 let createFail =()=>{

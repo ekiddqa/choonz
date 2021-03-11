@@ -1,9 +1,11 @@
 package com.qa.choonz.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import java.util.stream.Collectors;
 
+import com.qa.choonz.utils.Token;
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +48,18 @@ public class UserService {
 	}
 
 	// LOGIN
-	public Boolean login(User user) {
+	public HashMap<String, String> login(User user) {
 		User actual = this.repo.userLogin(user.getUsername());
-		return actual.getUsername().equals(user.getUsername()) && actual.getPassword().equals(user.getPassword());
+		Boolean isSuccessful = actual.getUsername().equals(user.getUsername()) && actual.getPassword().equals(user.getPassword());
+		String authToken = "";
+		if (isSuccessful) {
+			authToken = Token.generateToken(user);
+			this.repo.insertAuth(authToken, user.getUsername());
+		}
+		HashMap<String, String> returnHashMap = new HashMap<>();
+		returnHashMap.put("successful", isSuccessful.toString());
+		returnHashMap.put("auth", authToken);
+		return returnHashMap;
 	}
 
 }

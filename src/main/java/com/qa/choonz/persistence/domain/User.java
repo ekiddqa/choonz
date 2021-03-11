@@ -32,6 +32,8 @@ public class User {
     @NotNull
     private String password;
 
+    private String auth;
+
 
 	public User(@NotNull String username, @NotNull String password) {
 		super();

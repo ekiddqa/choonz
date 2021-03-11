@@ -43,7 +43,7 @@ public class UserController {
 	}
 
 	// LOGIN
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<UserDTO> login(@RequestBody User user) {
 		Boolean isSuccessful = this.service.login(user);
 		if (isSuccessful) {

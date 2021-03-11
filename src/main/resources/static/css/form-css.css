@@ -19,3 +19,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.failed-text {
+    font-size: large;
+    color: mediumblue;
+}

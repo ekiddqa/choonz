@@ -28,7 +28,7 @@ public class Artist {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Album> albums;
 
-    public Artist(Long id, String name) {
+    public Artist(Long id, @NotNull String name) {
         this.id = id;
         this.name = name;
     }

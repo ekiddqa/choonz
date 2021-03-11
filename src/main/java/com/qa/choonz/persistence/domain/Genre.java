@@ -33,7 +33,7 @@ public class Genre {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Album> albums;
 
-    public Genre(Long id, String name, String desc) {
+    public Genre(Long id, @NotNull String name, @NotNull String desc) {
         this.id = id;
         this.name = name;
         this.desc = desc;

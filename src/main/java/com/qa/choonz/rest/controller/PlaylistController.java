@@ -53,4 +53,9 @@ public class PlaylistController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@GetMapping("/read/name/{name}")
+	public ResponseEntity<List<PlaylistDTO>> read(@PathVariable String name) {
+		return new ResponseEntity<>(this.service.read(name), HttpStatus.OK);
+	}
+
 }

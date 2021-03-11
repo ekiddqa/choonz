@@ -1,4 +1,4 @@
-package com.qa.choonz.rest.controller;
+	package com.qa.choonz.rest.controller;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class AlbumController {
 
     @GetMapping("/read")
     public ResponseEntity<List<AlbumDTO>> read() {
-        return new ResponseEntity<List<AlbumDTO>>(this.service.read(), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
@@ -51,7 +51,7 @@ public class AlbumController {
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<AlbumDTO> delete(@PathVariable long id) {
-        return this.service.delete(id) ? new ResponseEntity<AlbumDTO>(HttpStatus.NO_CONTENT)
+        return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

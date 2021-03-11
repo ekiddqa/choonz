@@ -36,7 +36,7 @@ public class TrackController {
 
     @GetMapping("/read")
     public ResponseEntity<List<TrackDTO>> read() {
-        return new ResponseEntity<List<TrackDTO>>(this.service.read(), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
@@ -51,7 +51,7 @@ public class TrackController {
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<TrackDTO> delete(@PathVariable long id) {
-        return this.service.delete(id) ? new ResponseEntity<TrackDTO>(HttpStatus.NO_CONTENT)
+        return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

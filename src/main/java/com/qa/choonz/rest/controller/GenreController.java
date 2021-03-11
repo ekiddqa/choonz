@@ -36,7 +36,7 @@ public class GenreController {
 
     @GetMapping("/read")
     public ResponseEntity<List<GenreDTO>> read() {
-        return new ResponseEntity<List<GenreDTO>>(this.service.read(), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
@@ -51,7 +51,7 @@ public class GenreController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<GenreDTO> delete(@PathVariable long id) {
-        return this.service.delete(id) ? new ResponseEntity<GenreDTO>(HttpStatus.NO_CONTENT)
+        return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

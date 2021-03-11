@@ -36,7 +36,7 @@ public class ArtistController {
 
     @GetMapping("/read")
     public ResponseEntity<List<ArtistDTO>> read() {
-        return new ResponseEntity<List<ArtistDTO>>(this.service.read(), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
@@ -51,7 +51,7 @@ public class ArtistController {
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<ArtistDTO> delete(@PathVariable long id) {
-        return this.service.delete(id) ? new ResponseEntity<ArtistDTO>(HttpStatus.NO_CONTENT)
+        return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -28,14 +28,22 @@ public class UserService {
 	
 	@Autowired
 	public UserService (UserRepository repo, ModelMapper mapper) {
-		super();
 		this.repo = repo;
 		this.mapper = mapper;
 	}
 	
-	//CREATE
-	public UserDTO createUser(User user) {
-		return this.mapToDTO(this.repo.save(user));	
+//	//CREATE
+//	public UserDTO createUser(User user) {
+//		return this.mapToDTO(this.repo.save(user));
+//	}
+
+	public Boolean createUser(User user) {
+		if (this.repo.userLogin(user.getUsername()) == null) {
+			this.repo.save(user);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	//READ
@@ -43,36 +51,9 @@ public class UserService {
 		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
-	//SOLO
-	public UserDTO readSolo(long id) {
-		User user = this.repo.findById(id).orElseThrow(UserNotFoundException::new);
-		return this.mapToDTO(user);
-	}
-
-	//UPDATE
-	public UserDTO update(User user, long id) {
-		User toUpdate = this.repo.findById(id).orElseThrow(UserNotFoundException::new);
-		toUpdate.setUsername(user.getUsername());
-		toUpdate.setPassword(user.getPassword());
-		User updatedUser = this.repo.save(toUpdate);
-		return this.mapToDTO(updatedUser);
-	}
-
-	//DELETE
-	public boolean delete(long id) {
-		this.repo.deleteById(id);
-		return !this.repo.existsById(id);
-	}
-
-	//LOGIN
-	public Long login(String username, String password) {
-		List<UserDTO> log = this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
-		for (UserDTO details: log) {
-			if (details.getUsername().equals(username) && details.getPassword().equals(password)) {
-				return details.getId();
-			}
-		}
-		return null;
+	public Boolean login(User user) {
+		User actual = this.repo.userLogin(user.getUsername());
+		return actual.getUsername().equals(user.getUsername()) && actual.getPassword().equals(user.getPassword());
 	}
 
 }

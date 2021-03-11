@@ -21,57 +21,37 @@ import com.qa.choonz.service.UserService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	private UserService service;
 
 	@Autowired
 	public UserController(UserService userService) {
-		super();
 		this.service = userService;
 	}
 
-	// CREATE
+	// SIGNUP
 	@PostMapping("/signup")
 	public ResponseEntity<UserDTO> create(@RequestBody User user) {
-		UserDTO created = this.service.createUser(user);
-		return new ResponseEntity<>(created, HttpStatus.CREATED);
-	}
-
-	// READ
-	@GetMapping("/read")
-	public ResponseEntity<List<UserDTO>> read() {
-		return new ResponseEntity<List<UserDTO>>(this.service.read(), HttpStatus.OK);
-	}
-
-	// SOLO
-	@GetMapping("/read/{id}")
-	public ResponseEntity<UserDTO> readSolo(@PathVariable long id) {
-		return new ResponseEntity<UserDTO>(this.service.readSolo(id), HttpStatus.OK);
-	}
-
-	// UPDATE
-	@PostMapping("/update/{id}")
-	public ResponseEntity<UserDTO> update(@RequestBody User user, @PathVariable long id) {
-		return new ResponseEntity<UserDTO>(this.service.update(user, id), HttpStatus.ACCEPTED);
-	}
-
-	// DELETE
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<UserDTO> delete(@PathVariable long id) {
-		return this.service.delete(id) ? new ResponseEntity<UserDTO>(HttpStatus.NO_CONTENT)
-				: new ResponseEntity<UserDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
+		Boolean created = this.service.createUser(user);
+		if (created) {
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	// LOGIN
 	@GetMapping("/login")
-	public ResponseEntity<UserDTO> login(@RequestBody String username, @RequestBody String password) {
-		Long details = this.service.login(username, password);
-		if (details == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<UserDTO> login(@RequestBody User user) {
+		Boolean isSuccessful = this.service.login(user);
+		if (isSuccessful) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
+

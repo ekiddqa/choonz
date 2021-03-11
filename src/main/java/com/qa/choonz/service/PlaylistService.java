@@ -56,4 +56,9 @@ public class PlaylistService {
         return !this.repo.existsById(id);
     }
 
+    public List<PlaylistDTO> read(String name) {
+        List<Playlist> found = this.repo.searchByName(name);
+        return found.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
 }

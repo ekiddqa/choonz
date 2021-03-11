@@ -56,4 +56,9 @@ public class AlbumService {
         return !this.repo.existsById(id);
     }
 
+    public List<AlbumDTO> read(String name) {
+        List<Album> found = this.repo.searchByName(name);
+        return found.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
 }

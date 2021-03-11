@@ -6,10 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import com.qa.choonz.persistence.domain.Album;
 
+import java.util.List;
+
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
-    @Query(value = "SELECT * FROM ALBUM WHERE NAME = ?1", nativeQuery = true)
-    Album searchByName(String name);
+    @Query(value = "SELECT * FROM ALBUM WHERE NAME ~* ?1", nativeQuery = true)
+    List<Album> searchByName(String name);
 
 }

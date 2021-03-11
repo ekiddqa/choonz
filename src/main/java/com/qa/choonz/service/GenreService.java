@@ -52,4 +52,8 @@ public class GenreService {
         return !this.repo.existsById(id);
     }
 
+    public List<GenreDTO> read(String name) {
+        List<Genre> found = this.repo.searchByName(name);
+        return found.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
 }

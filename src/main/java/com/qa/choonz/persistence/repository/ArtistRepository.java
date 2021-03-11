@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.qa.choonz.persistence.domain.Artist;
 
+import java.util.List;
+
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
-    @Query(value = "SELECT * FROM ARTIST WHERE NAME = ?1", nativeQuery = true)
-    Artist searchByName(String name);
+    @Query(value = "SELECT * FROM ARTIST WHERE NAME ~* ?1", nativeQuery = true)
+    List<Artist> searchByName(String name);
 
 }

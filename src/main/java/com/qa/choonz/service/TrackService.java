@@ -57,4 +57,9 @@ public class TrackService {
         return !this.repo.existsById(id);
     }
 
+    public List<TrackDTO> read(String name) {
+        List<Track> found = this.repo.searchByName(name);
+        return found.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
 }

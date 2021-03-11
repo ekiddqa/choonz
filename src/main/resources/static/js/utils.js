@@ -74,3 +74,360 @@ let addToTable = (data, table) => {
         countNum += 1;
     }
 }
+
+// Table Creation for artists
+export let getArtists = (name) => {
+    let artistTable = createTableArtist();
+    fetch(`http://localhost:8082/artists/read/name/${name}`)
+        .then((response) => {
+            if (response.status === 200) {
+                response.json()
+                    .then((data) => {
+                        addToArtist(data, artistTable)
+                    })
+            }
+        })
+    return artistTable;
+}
+
+let createTableArtist = () => {
+    const table = document.createElement('table');
+
+    const tr = document.createElement('tr');
+
+    const count = document.createElement('th');
+    count.className = "regular-text";
+    count.innerHTML = "#";
+
+    const name = document.createElement('th');
+    name.className = "regular-text";
+    name.innerHTML = "Name";
+
+    const album = document.createElement('th');
+    album.className = "regular-text";
+    album.innerHTML = "Album(s)";
+
+    tr.append(count, name, album);
+    table.append(tr);
+    return table;
+}
+
+let addToArtist = (data, table) => {
+    let countNum = 1;
+    for (let artist in data) {
+        let tr = document.createElement('tr');
+
+        let count = document.createElement('th');
+        count.className = "regular-text";
+        count.innerHTML = countNum.toString();
+
+        let name = document.createElement('td');
+        name.className = "regular-text";
+        name.innerHTML = data[artist]['name'];
+
+        let allAlbums = "";
+
+        for (let album in data[artist]['albums']) {
+            allAlbums += data[artist]['albums'][album]['name'];
+            allAlbums += ",";
+        }
+
+        allAlbums = allAlbums.replace(/(^,)|(,$)/g, "");
+
+        let album = document.createElement('td');
+        album.className = "regular-text";
+        album.innerHTML = allAlbums;
+
+        tr.append(count, name, album);
+        table.append(tr);
+
+        countNum += 1;
+    }
+}
+
+// Table Creation For Genre
+export let getGenres = (name) => {
+    let genreTable = createTableGenre();
+    fetch(`http://localhost:8082/genres/read/name/${name}`)
+        .then((response) => {
+            if (response.status === 200) {
+                response.json()
+                    .then((data) => {
+                        addToGenre(data, genreTable)
+                    })
+            }
+        })
+    return genreTable;
+}
+
+let createTableGenre = () => {
+    const table = document.createElement('table');
+
+    const tr = document.createElement('tr');
+
+    const count = document.createElement('th');
+    count.className = "regular-text";
+    count.innerHTML = "#";
+
+    const name = document.createElement('th');
+    name.className = "regular-text";
+    name.innerHTML = "Name";
+
+    const desc = document.createElement('th');
+    desc.className = "regular-text";
+    desc.innerHTML = "Description";
+
+    const album = document.createElement('th');
+    album.className = "regular-text";
+    album.innerHTML = "Album(s)";
+
+    tr.append(count, name, desc, album);
+    table.append(tr);
+    return table;
+}
+
+let addToGenre = (data, table) => {
+    let countNum = 1;
+    for (let genre in data) {
+        let tr = document.createElement('tr');
+
+        let count = document.createElement('th');
+        count.className = "regular-text";
+        count.innerHTML = countNum.toString();
+
+        let name = document.createElement('td');
+        name.className = "regular-text";
+        name.innerHTML = data[genre]['name'];
+
+        let desc = document.createElement('td');
+        desc.className = "regular-text";
+        desc.innerHTML = data[genre]['desc'];
+
+        let allAlbums = "";
+
+        for (let album in data[genre]['albums']) {
+            allAlbums += data[genre]['albums'][album]['name'];
+            allAlbums += ',';
+        }
+
+        allAlbums = allAlbums.replace(/(^,)|(,$)/g, "");
+
+        let album = document.createElement('td');
+        album.className = "regular-text";
+        album.innerHTML = allAlbums;
+
+        tr.append(count, name, desc, album);
+        table.append(tr);
+
+        countNum += 1;
+    }
+}
+
+// Table Creation For Playlist
+export let getPlaylists = (name) => {
+    let playlistTable = createTablePlaylist();
+    fetch(`http://localhost:8082/playlists/read/name/${name}`)
+        .then((response) => {
+            if (response.status === 200) {
+                response.json()
+                    .then((data) => {
+                        addToPlaylist(data, playlistTable)
+                    })
+            }
+        })
+    return playlistTable;
+}
+
+let createTablePlaylist = () => {
+    const table = document.createElement('table');
+
+    const tr = document.createElement('tr');
+
+    const count = document.createElement('th');
+    count.className = "regular-text";
+    count.innerHTML = "#";
+
+    const name = document.createElement('th');
+    name.className = "regular-text";
+    name.innerHTML = "Name";
+
+    const desc = document.createElement('th');
+    desc.className = "regular-text";
+    desc.innerHTML = "Description";
+
+    const tracks = document.createElement('th');
+    tracks.className = "regular-text";
+    tracks.innerHTML = "Track(s)";
+
+    tr.append(count, name, desc, tracks);
+    table.append(tr);
+    return table;
+}
+
+let addToPlaylist = (data, table) => {
+    let countNum = 1;
+    for (let playlist in data) {
+        let tr = document.createElement('tr');
+
+        let count = document.createElement('th');
+        count.className = "regular-text";
+        count.innerHTML = countNum.toString();
+
+        let name = document.createElement('td');
+        name.className = "regular-text";
+        name.innerHTML = data[playlist]['name'];
+
+        let desc = document.createElement('td');
+        desc.className = "regular-text";
+        desc.innerHTML = data[playlist]['desc'];
+
+        let allTracks = "";
+
+        for (let track in data[playlist]['tracks']) {
+            allTracks += data[playlist]['tracks'][track]['name'];
+            allTracks += ',';
+        }
+
+        allTracks = allTracks.replace(/(^,)|(,$)/g, "");
+
+        let tracks = document.createElement('td');
+        tracks.className = "regular-text";
+        tracks.innerHTML = allTracks;
+
+        tr.append(count, name, desc, tracks);
+        table.append(tr);
+
+        countNum += 1;
+    }
+}
+
+// Table Creation For Albums
+export let getAlbums = (name) => {
+    let albumsTable = createTableAlbums();
+    fetch(`http://localhost:8082/albums/read/name/${name}`)
+        .then((response) => {
+            if (response.status === 200) {
+                response.json()
+                    .then((data) => {
+                        addToAlbum(data, albumsTable)
+                    })
+            }
+        })
+    return albumsTable;
+}
+
+let createTableAlbums = () => {
+    const table = document.createElement('table');
+
+    const tr = document.createElement('tr');
+
+    const count = document.createElement('th');
+    count.className = "regular-text";
+    count.innerHTML = "#";
+
+    const name = document.createElement('th');
+    name.className = "regular-text";
+    name.innerHTML = "Name";
+
+    const tracks = document.createElement('th');
+    tracks.className = "regular-text";
+    tracks.innerHTML = "Track(s)";
+
+    tr.append(count, name, tracks);
+    table.append(tr);
+    return table;
+}
+
+let addToAlbum = (data, table) => {
+    let countNum = 1;
+    for (let album in data) {
+        let tr = document.createElement('tr');
+
+        let count = document.createElement('th');
+        count.className = "regular-text";
+        count.innerHTML = countNum.toString();
+
+        let name = document.createElement('td');
+        name.className = "regular-text";
+        name.innerHTML = data[album]['name'];
+
+        let allTracks = "";
+
+        for (let track in data[album]['tracks']) {
+            allTracks += data[album]['tracks'][track]['name'];
+            allTracks += ',';
+        }
+
+        allTracks = allTracks.replace(/(^,)|(,$)/g, "");
+
+        let tracks = document.createElement('td');
+        tracks.className = "regular-text";
+        tracks.innerHTML = allTracks;
+
+        tr.append(count, name, tracks);
+        table.append(tr);
+
+        countNum += 1;
+    }
+}
+
+// Table Creation For Tracks
+export let getTracks = (name) => {
+    let tracksTable = createTableTracks();
+    fetch(`http://localhost:8082/tracks/read/name/${name}`)
+        .then((response) => {
+            if (response.status === 200) {
+                response.json()
+                    .then((data) => {
+                        addToTrack(data, tracksTable)
+                    })
+            }
+        })
+    return tracksTable;
+}
+
+let createTableTracks = () => {
+    const table = document.createElement('table');
+
+    const tr = document.createElement('tr');
+
+    const count = document.createElement('th');
+    count.className = "regular-text";
+    count.innerHTML = "#";
+
+    const name = document.createElement('th');
+    name.className = "regular-text";
+    name.innerHTML = "Name";
+
+    const duration = document.createElement('th');
+    duration.className = "regular-text";
+    duration.innerHTML = "Duration";
+
+    tr.append(count, name, duration);
+    table.append(tr);
+    return table;
+}
+
+let addToTrack = (data, table) => {
+    let countNum = 1;
+    for (let track in data) {
+        let tr = document.createElement('tr');
+
+        let count = document.createElement('th');
+        count.className = "regular-text";
+        count.innerHTML = countNum.toString();
+
+        let name = document.createElement('td');
+        name.className = "regular-text";
+        name.innerHTML = data[track]['name'];
+
+        let duration = document.createElement('td');
+        duration.className = "regular-text";
+        duration.innerHTML = data[track]['duration'];
+
+        tr.append(count, name, duration);
+        table.append(tr);
+
+        countNum += 1;
+    }
+}

@@ -16,8 +16,8 @@ import com.qa.choonz.rest.dto.UserDTO;
 import com.qa.choonz.service.UserService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/users")
+@CrossOrigin("https://localhost:8082")
 public class UserController {
 
 	private UserService service;

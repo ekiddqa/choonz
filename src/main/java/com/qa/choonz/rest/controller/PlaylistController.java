@@ -19,7 +19,7 @@ import com.qa.choonz.service.PlaylistService;
 
 @RestController
 @RequestMapping("/playlists")
-@CrossOrigin
+@CrossOrigin("https://localhost:8082")
 public class PlaylistController {
 
     private PlaylistService service;

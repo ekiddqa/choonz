@@ -19,7 +19,7 @@ import com.qa.choonz.service.ArtistService;
 
 @RestController
 @RequestMapping("/artists")
-@CrossOrigin
+@CrossOrigin("https://localhost:8082")
 public class ArtistController {
 
     private ArtistService service;

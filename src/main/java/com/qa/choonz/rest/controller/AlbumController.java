@@ -19,7 +19,7 @@ import com.qa.choonz.service.AlbumService;
 
 @RestController
 @RequestMapping("/albums")
-@CrossOrigin
+@CrossOrigin("https://localhost:8082")
 public class AlbumController {
 
     private AlbumService service;

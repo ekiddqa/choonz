@@ -19,7 +19,7 @@ import com.qa.choonz.service.TrackService;
 
 @RestController
 @RequestMapping("/tracks")
-@CrossOrigin
+@CrossOrigin("https://localhost:8082")
 public class TrackController {
 
     private TrackService service;

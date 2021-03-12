@@ -461,15 +461,23 @@ let createTableTracks = () => {
     name.className = "regular-text";
     name.innerHTML = "Name";
 
+    const album = document.createElement('th');
+    album.className = "regular-text";
+    album.innerHTML = "Album";
+
     const duration = document.createElement('th');
     duration.className = "regular-text";
     duration.innerHTML = "Duration";
+
+    const playlist = document.createElement('th');
+    playlist.className = "regular-text";
+    playlist.innerHTML = "Playlist(s)";
 
     const actions = document.createElement('th');
     actions.className = "regular-text";
     actions.innerHTML = "Actions";
 
-    tr.append(count, name, duration, actions);
+    tr.append(count, name, album, duration ,playlist, actions);
     table.append(tr);
     return table;
 }

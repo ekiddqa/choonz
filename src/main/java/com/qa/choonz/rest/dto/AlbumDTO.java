@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AlbumDTO {
 
-		private long id;
+	private long id;
 		private String name;
 		private List<TrackDTO> tracks;
 		private String cover;

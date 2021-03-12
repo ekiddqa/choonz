@@ -107,7 +107,11 @@ let createTableArtist = () => {
     album.className = "regular-text";
     album.innerHTML = "Album(s)";
 
-    tr.append(count, name, album);
+    const actions = document.createElement('th');
+    actions.className = "regular-text";
+    actions.innerHTML = "Actions";
+
+    tr.append(count, name, album, actions);
     table.append(tr);
     return table;
 }
@@ -181,7 +185,11 @@ let createTableGenre = () => {
     album.className = "regular-text";
     album.innerHTML = "Album(s)";
 
-    tr.append(count, name, desc, album);
+    const actions = document.createElement('th');
+    actions.className = "regular-text";
+    actions.innerHTML = "Actions";
+
+    tr.append(count, name, desc, album, actions);
     table.append(tr);
     return table;
 }
@@ -259,7 +267,11 @@ let createTablePlaylist = () => {
     tracks.className = "regular-text";
     tracks.innerHTML = "Track(s)";
 
-    tr.append(count, name, desc, tracks);
+    const actions = document.createElement('th');
+    actions.className = "regular-text";
+    actions.innerHTML = "Actions";
+
+    tr.append(count, name, desc, tracks, actions);
     table.append(tr);
     return table;
 }
@@ -333,7 +345,19 @@ let createTableAlbums = () => {
     tracks.className = "regular-text";
     tracks.innerHTML = "Track(s)";
 
-    tr.append(count, name, tracks);
+    const artist = document.createElement('th');
+    artist.className = "regular-text";
+    artist.innerHTML = "Artist";
+
+    const genre = document.createElement('th');
+    genre.className = "regular-text";
+    genre.innerHTML = "Genre";
+
+    const actions = document.createElement('th');
+    actions.className = "regular-text";
+    actions.innerHTML = "Actions";
+
+    tr.append(count, name, tracks, artist, genre, actions);
     table.append(tr);
     return table;
 }
@@ -364,7 +388,45 @@ let addToAlbum = (data, table) => {
         tracks.className = "regular-text";
         tracks.innerHTML = allTracks;
 
-        tr.append(count, name, tracks);
+        let artist = document.createElement('td');
+        artist.className = "regular-text";
+        fetch('artists/read')
+            .then((response)=>{
+                return response.json();
+            }).then((responseData)=>{
+            let albumLookingFor = data[album]['name'];
+            for (let artistLocal in responseData) {
+                    let artistName = responseData[artistLocal]['name'];
+                    for (let albumLocal in responseData[artistLocal]['albums']) {
+                        let albumName = responseData[artistLocal]['albums'][albumLocal]['name'];
+                        if (albumLookingFor === albumName) {
+                            artist.innerHTML = artistName;
+                            break;
+                        }
+                    }
+                }
+        })
+
+        let genre = document.createElement('td');
+        genre.className = "regular-text";
+        fetch('genres/read')
+            .then((response)=>{
+                return response.json();
+            }).then((responseData)=>{
+            let albumLookingFor = data[album]['name'];
+            for (let genreLocal in responseData) {
+                let genreName = responseData[genreLocal]['name'];
+                for (let albumLocal in responseData[genreLocal]['albums']) {
+                    let albumName = responseData[genreLocal]['albums'][albumLocal]['name'];
+                    if (albumLookingFor === albumName) {
+                        genre.innerHTML = genreName;
+                        break;
+                    }
+                }
+            }
+        })
+
+        tr.append(count, name, tracks, artist, genre);
         table.append(tr);
 
         countNum += 1;
@@ -403,7 +465,11 @@ let createTableTracks = () => {
     duration.className = "regular-text";
     duration.innerHTML = "Duration";
 
-    tr.append(count, name, duration);
+    const actions = document.createElement('th');
+    actions.className = "regular-text";
+    actions.innerHTML = "Actions";
+
+    tr.append(count, name, duration, actions);
     table.append(tr);
     return table;
 }

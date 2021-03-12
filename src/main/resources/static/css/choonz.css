@@ -33,3 +33,33 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.button-as-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: Consolas;
+    color: #001eff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.confirm {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2dc937;
+    cursor: pointer;
+}
+
+.cancel {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #cc3232;
+    cursor: pointer;
+}
+
+.full-size-table {
+    width: 100%;
+}

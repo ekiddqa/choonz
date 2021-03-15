@@ -13,6 +13,6 @@ import java.util.List;
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
     @Query(value = "SELECT * FROM ARTIST WHERE NAME ~* ?1", nativeQuery = true)
-    List<Artist> searchByName(String name);
+    List<Artist> searchByName(String name);   
 
 }

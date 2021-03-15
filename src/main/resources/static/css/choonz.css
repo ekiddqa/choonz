@@ -63,3 +63,19 @@
 .full-size-table {
     width: 100%;
 }
+
+.delete-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #cc3232;
+    cursor: pointer;
+}
+
+.update-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #FDB600;
+    cursor: pointer;
+}

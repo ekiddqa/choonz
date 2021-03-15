@@ -1,5 +1,4 @@
-import {getTop10, getArtists, getGenres, getPlaylists, getTracks} from './utils.js'
-import {getAlbums} from "./utils-2.js";
+import {getTop10, getArtists, getGenres, getPlaylists, getAlbums, getTracks} from './utils.js'
 import {additionLink} from "./utils-create.js";
 
 let auth = sessionStorage.getItem('auth');
@@ -54,11 +53,13 @@ let search =()=>{
         table.id = "results-table";
         table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Album"));
     } else if (category === "Track") {
         let table = getTracks(name);
         table.id = "results-table";
         table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Track"));
     }
 }
 

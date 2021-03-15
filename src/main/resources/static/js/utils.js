@@ -120,6 +120,8 @@ let addToArtist = (data, table) => {
     let countNum = 1;
     for (let artist in data) {
         let tr = document.createElement('tr');
+        let refNum = countNum;
+        tr.id = `row-${refNum}`;
 
         let count = document.createElement('th');
         count.className = "regular-text";
@@ -142,7 +144,22 @@ let addToArtist = (data, table) => {
         album.className = "regular-text";
         album.innerHTML = allAlbums;
 
-        tr.append(count, name, album);
+        let actions = document.createElement('td');
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = `&#10071`;
+        deleteButton.addEventListener('click', ()=>{deleteAction(refNum)});
+
+        let editButton = document.createElement('button');
+        editButton.className = 'update-button';
+        editButton.innerHTML = `&#9999`;
+        editButton.addEventListener('click', ()=>{
+            makeEditable(refNum, 'Artist')
+        })
+        actions.append(deleteButton, editButton);
+
+        tr.append(count, name, album, actions);
         table.append(tr);
 
         countNum += 1;
@@ -198,6 +215,8 @@ let addToGenre = (data, table) => {
     let countNum = 1;
     for (let genre in data) {
         let tr = document.createElement('tr');
+        let refNum = countNum;
+        tr.id = `row-${refNum}`;
 
         let count = document.createElement('th');
         count.className = "regular-text";
@@ -224,7 +243,16 @@ let addToGenre = (data, table) => {
         album.className = "regular-text";
         album.innerHTML = allAlbums;
 
-        tr.append(count, name, desc, album);
+        let actions = document.createElement('td');
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = `&#10071`;
+        deleteButton.addEventListener('click', ()=>{deleteAction(refNum)});
+
+        actions.append(deleteButton);
+
+        tr.append(count, name, desc, album, actions);
         table.append(tr);
 
         countNum += 1;
@@ -280,6 +308,7 @@ let addToPlaylist = (data, table) => {
     let countNum = 1;
     for (let playlist in data) {
         let tr = document.createElement('tr');
+        tr.id = `row-${countNum}`;
 
         let count = document.createElement('th');
         count.className = "regular-text";
@@ -306,7 +335,16 @@ let addToPlaylist = (data, table) => {
         tracks.className = "regular-text";
         tracks.innerHTML = allTracks;
 
-        tr.append(count, name, desc, tracks);
+        let actions = document.createElement('td');
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = `&#10071`;
+        deleteButton.addEventListener('click', ()=>{deleteAction(refNum)});
+
+        actions.append(deleteButton);
+
+        tr.append(count, name, desc, tracks, actions);
         table.append(tr);
 
         countNum += 1;
@@ -366,6 +404,8 @@ let addToAlbum = (data, table) => {
     let countNum = 1;
     for (let album in data) {
         let tr = document.createElement('tr');
+        let refNum = countNum;
+        tr.id = `row-${refNum}`;
 
         let count = document.createElement('th');
         count.className = "regular-text";
@@ -426,7 +466,16 @@ let addToAlbum = (data, table) => {
             }
         })
 
-        tr.append(count, name, tracks, artist, genre);
+        let actions = document.createElement('td');
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = `&#10071`;
+        deleteButton.addEventListener('click', ()=>{deleteAction(refNum)});
+
+        actions.append(deleteButton);
+
+        tr.append(count, name, tracks, artist, genre, actions);
         table.append(tr);
 
         countNum += 1;
@@ -486,6 +535,8 @@ let addToTrack = (data, table) => {
     let countNum = 1;
     for (let track in data) {
         let tr = document.createElement('tr');
+        let refNum = countNum;
+        tr.id = `row-${refNum}`;
 
         let count = document.createElement('th');
         count.className = "regular-text";
@@ -495,13 +546,184 @@ let addToTrack = (data, table) => {
         name.className = "regular-text";
         name.innerHTML = data[track]['name'];
 
+        let album = document.createElement('td');
+        album.className = "regular-text";
+        fetch('albums/read')
+            .then((response)=>{
+                return response.json();
+            }).then((responseData)=>{
+            let trackLookingFor = data[track]['name'];
+            for (let albumLocal in responseData) {
+                let albumName = responseData[albumLocal]['name'];
+                for (let trackLocal in responseData[albumLocal]['tracks']) {
+                    let trackName = responseData[albumLocal]['tracks'][trackLocal]['name'];
+                    if (trackLookingFor === trackName) {
+                        album.innerHTML = albumName;
+                        break;
+                    }
+                }
+            }
+        })
+
         let duration = document.createElement('td');
         duration.className = "regular-text";
         duration.innerHTML = data[track]['duration'];
 
-        tr.append(count, name, duration);
+        let playlist = document.createElement('td');
+        playlist.className = "regular-text";
+        fetch('playlists/read')
+            .then((response)=>{
+                return response.json();
+            }).then((responseData)=>{
+            let trackLookingFor = data[track]['name'];
+            for (let playlistLocal in responseData) {
+                let playlistName = responseData[playlistLocal]['name'];
+                for (let trackLocal in responseData[playlistLocal]['tracks']) {
+                    let trackName = responseData[playlistLocal]['tracks'][trackLocal]['name'];
+                    if (trackLookingFor === trackName) {
+                        playlist.innerHTML = playlistName;
+                        break;
+                    }
+                }
+            }
+        })
+
+        let actions = document.createElement('td');
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = `&#10071`;
+        deleteButton.addEventListener('click', ()=>{deleteAction(refNum)});
+
+        actions.append(deleteButton);
+
+        tr.append(count, name, album, duration, playlist, actions);
         table.append(tr);
 
         countNum += 1;
+    }
+}
+
+let deleteAction = async (rowID)=>{
+    let category = document.querySelector('#select-bar').value;
+    category = category.toString().toLowerCase();
+    let row = document.querySelector('#results-table').rows[rowID];
+    let name = row.cells[1].innerHTML;
+    let entityID;
+
+    await fetch(`${category}s/read/name/${name}`)
+        .then((response)=>{
+            return response.json();
+        }).then((responseData)=>{
+            console.log(responseData);
+            console.log(responseData[0])
+            entityID = responseData[0]['id'];
+        })
+
+    fetch(`${category}s/delete/${entityID}`, {
+        method: 'DELETE'
+    })
+        .finally(()=>{
+            let searchButton = document.querySelector('#search-button');
+            searchButton.click();
+        })
+}
+
+let  makeEditable = (rowID, type) =>{
+    let row = document.querySelector('#results-table').rows[rowID];
+    if (type === "Artist") {
+
+        let inputcol = document.createElement('td');
+
+        let name = document.createElement('input');
+        name.className = "form-control";
+        name.id = "new-artist-name";
+
+        inputcol.append(name);
+
+        row.cells[1].replaceWith(inputcol);
+
+        row.cells[3].innerHTML = '';
+
+        let actionsCol = document.createElement('td');
+
+        let confirm = document.createElement('button');
+        confirm.className = 'confirm';
+        confirm.innerHTML = `&#10004`;
+        confirm.addEventListener("click", ()=>{updateArtist(), actionsReset(actionsCol, rowID, type), resetElementTagsAndClasses(row)});
+
+        let cancel = document.createElement('button');
+        cancel.className = "cancel";
+        cancel.innerHTML = `&#10006`;
+        cancel.addEventListener("click", () => {
+            cancelCreate(rowID)
+        });
+
+        actionsCol.append(confirm, cancel);
+
+        row.cells[3].replaceWith(actionsCol);
+    }
+}
+
+let updateArtist = async ()=>{
+    let artistName = document.querySelector('#new-artist-name').value;
+    let artistID;
+    let returnBody;
+    await fetch(`/artists/read/name/${artistName}`)
+        .then((response)=>{
+            return response.json();
+        }).then((responseData)=>{
+            for (let artistLocal in responseData) {
+                if (artistLocal == 0) {
+                    console.log(responseData[])
+                    artistID = responseData[artistLocal]['id'];
+                    returnBody = responseData[artistLocal];
+                }
+            }
+        })
+    if (artistName !== null || artistName !== "") {
+        returnBody['name'] = artistName;
+    }
+    fetch(`/artists/update/${artistID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(returnBody)
+    })
+}
+
+let actionsReset =(oldCol, rowID, type)=>{
+    oldCol.innerHTML = "";
+
+    let deleteButton = document.createElement('button');
+    deleteButton.className = "delete-button";
+    deleteButton.innerHTML = `&#10071`;
+    deleteButton.addEventListener('click', ()=>{deleteAction(rowID)});
+
+    let editButton = document.createElement('button');
+    editButton.className = 'update-button';
+    editButton.innerHTML = `&#9999`;
+    editButton.addEventListener('click', ()=>{
+        makeEditable(rowID, `${type}`)
+    })
+
+    oldCol.append(deleteButton, editButton);
+}
+
+let cancelCreate = (id) => {
+    let resultsTable = document.querySelector('#results-table');
+    resultsTable.removeChild(document.querySelector(`#input-row-${id}`));
+}
+
+let resetElementTagsAndClasses =(row)=>{
+    for (let element in row.cells.length) {
+        if (element == 0) {
+            row.cells[element].replaceWith(document.createElement('th'));
+            row.cells[element].className = "regular-text";
+        } else {
+            row.cells[element].replaceWith(document.createElement('th'));
+            row.cells[element].className = "regular-text";
+        }
     }
 }

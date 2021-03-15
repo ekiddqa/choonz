@@ -1,4 +1,5 @@
 import {getTop10, getArtists, getGenres, getPlaylists, getAlbums, getTracks} from './utils.js'
+import {additionLink} from "./utils-create.js";
 
 let auth = sessionStorage.getItem('auth');
 
@@ -31,19 +32,34 @@ let search =()=>{
     let name = document.querySelector('#input-bar').value;
     if (category === "Artist") {
         let table = getArtists(name);
+        table.id = "results-table";
+        table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Artist"));
     } else if (category === "Genre") {
         let table = getGenres(name);
+        table.id = "results-table";
+        table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Genre"));
     } else if (category === "Playlist") {
         let table = getPlaylists(name);
+        table.id = "results-table";
+        table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Playlist"));
     } else if (category === "Album") {
         let table = getAlbums(name);
+        table.id = "results-table";
+        table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Album"));
     } else if (category === "Track") {
         let table = getTracks(name);
+        table.id = "results-table";
+        table.className = "full-size-table";
         centreCol.append(table);
+        centreCol.append(additionLink("Track"));
     }
 }
 

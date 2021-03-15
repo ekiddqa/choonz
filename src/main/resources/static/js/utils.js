@@ -675,7 +675,7 @@ let updateArtist = async ()=>{
         }).then((responseData)=>{
             for (let artistLocal in responseData) {
                 if (artistLocal == 0) {
-                    console.log(responseData[])
+                    console.log(responseData[artistLocal])
                     artistID = responseData[artistLocal]['id'];
                     returnBody = responseData[artistLocal];
                 }

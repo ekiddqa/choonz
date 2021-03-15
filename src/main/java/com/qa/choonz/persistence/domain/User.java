@@ -18,16 +18,16 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 public class User {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    
+
     @NotNull
     @Column(name = "username", unique = true)
     private String username;
-   
+
     @Column(name = "password")
     @NotNull
     private String password;
@@ -35,11 +35,11 @@ public class User {
     private String auth;
 
 
-	public User(@NotNull String username, @NotNull String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+    public User(@NotNull String username, @NotNull String password) {
+        super();
+        this.username = username;
+        this.password = password;
+    }
 
 }
     

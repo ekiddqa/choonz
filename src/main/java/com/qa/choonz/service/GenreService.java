@@ -18,7 +18,6 @@ public class GenreService {
     private ModelMapper mapper;
 
     public GenreService(GenreRepository repo, ModelMapper mapper) {
-        super();
         this.repo = repo;
         this.mapper = mapper;
     }

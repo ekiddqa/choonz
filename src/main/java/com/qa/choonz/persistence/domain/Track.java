@@ -29,7 +29,7 @@ public class Track {
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
-    
+
     @ManyToOne
     @JoinColumn(name = "genre_id")
     private Genre genre;

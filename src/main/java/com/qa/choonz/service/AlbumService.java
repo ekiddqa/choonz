@@ -18,7 +18,6 @@ public class AlbumService {
     private ModelMapper mapper;
 
     public AlbumService(AlbumRepository repo, ModelMapper mapper) {
-        super();
         this.repo = repo;
         this.mapper = mapper;
     }

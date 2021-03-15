@@ -18,7 +18,6 @@ public class TrackService {
     private ModelMapper mapper;
 
     public TrackService(TrackRepository repo, ModelMapper mapper) {
-        super();
         this.repo = repo;
         this.mapper = mapper;
     }

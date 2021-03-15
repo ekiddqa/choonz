@@ -18,7 +18,6 @@ public class ArtistService {
     private ModelMapper mapper;
 
     public ArtistService(ArtistRepository repo, ModelMapper mapper) {
-        super();
         this.repo = repo;
         this.mapper = mapper;
     }

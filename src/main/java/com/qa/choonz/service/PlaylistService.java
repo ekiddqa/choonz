@@ -18,7 +18,6 @@ public class PlaylistService {
     private ModelMapper mapper;
 
     public PlaylistService(PlaylistRepository repo, ModelMapper mapper) {
-        super();
         this.repo = repo;
         this.mapper = mapper;
     }

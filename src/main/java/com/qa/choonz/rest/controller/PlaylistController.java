@@ -1,6 +1,7 @@
 package com.qa.choonz.rest.controller;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,42 +21,42 @@ import com.qa.choonz.service.PlaylistService;
 @CrossOrigin("https://localhost:8082")
 public class PlaylistController {
 
-	private PlaylistService service;
+    private PlaylistService service;
 
-	public PlaylistController(PlaylistService service) {
-		super();
-		this.service = service;
-	}
+    public PlaylistController(PlaylistService service) {
+        super();
+        this.service = service;
+    }
 
-	@PostMapping("/create")
-	public ResponseEntity<PlaylistDTO> create(@RequestBody Playlist playlist) {
-		return new ResponseEntity<>(this.service.create(playlist), HttpStatus.CREATED);
-	}
+    @PostMapping("/create")
+    public ResponseEntity<PlaylistDTO> create(@RequestBody Playlist playlist) {
+        return new ResponseEntity<>(this.service.create(playlist), HttpStatus.CREATED);
+    }
 
-	@GetMapping("/read")
-	public ResponseEntity<List<PlaylistDTO>> read() {
-		return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
-	}
+    @GetMapping("/read")
+    public ResponseEntity<List<PlaylistDTO>> read() {
+        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
+    }
 
-	@GetMapping("/read/{id}")
-	public ResponseEntity<PlaylistDTO> read(@PathVariable long id) {
-		return new ResponseEntity<>(this.service.read(id), HttpStatus.OK);
-	}
+    @GetMapping("/read/{id}")
+    public ResponseEntity<PlaylistDTO> read(@PathVariable long id) {
+        return new ResponseEntity<>(this.service.read(id), HttpStatus.OK);
+    }
 
-	@PostMapping("/update/{id}")
-	public ResponseEntity<PlaylistDTO> update(@RequestBody Playlist playlist, @PathVariable long id) {
-		return new ResponseEntity<>(this.service.update(playlist, id), HttpStatus.ACCEPTED);
-	}
+    @PostMapping("/update/{id}")
+    public ResponseEntity<PlaylistDTO> update(@RequestBody Playlist playlist, @PathVariable long id) {
+        return new ResponseEntity<>(this.service.update(playlist, id), HttpStatus.ACCEPTED);
+    }
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<PlaylistDTO> delete(@PathVariable long id) {
-		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<PlaylistDTO> delete(@PathVariable long id) {
+        return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-	@GetMapping("/read/name/{name}")
-	public ResponseEntity<List<PlaylistDTO>> read(@PathVariable String name) {
-		return new ResponseEntity<>(this.service.read(name), HttpStatus.OK);
-	}
+    @GetMapping("/read/name/{name}")
+    public ResponseEntity<List<PlaylistDTO>> read(@PathVariable String name) {
+        return new ResponseEntity<>(this.service.read(name), HttpStatus.OK);
+    }
 
 }

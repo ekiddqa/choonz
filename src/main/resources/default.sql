@@ -1,2 +1,3 @@
-INSERT INTO ARTIST (name) VALUES ('Default_Artist');
-INSERT INTO GENRE (name, desc) VALUES ('Default_Genre', 'Generic Genre');
+INSERT INTO ARTIST (NAME) VALUES ('Default Artist');
+INSERT INTO GENRE (NAME, DESC) VALUES ('Default Genre', 'Generic Genre');
+INSERT INTO PLAYLIST (NAME, DESC, ARTWORK) VALUES ('Default Playlist', 'Generic Playlist', 'Generic Artwork');

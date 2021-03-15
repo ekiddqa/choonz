@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 public class AlbumDTO {
 
 	private long id;
-	private String name;
-	private List<TrackDTO> tracks;
-	private String cover;
+		private String name;
+		private List<TrackDTO> tracks;
+		private String cover;
 
 }
